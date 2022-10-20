@@ -1,18 +1,29 @@
-search_text = ","
-replace_text = ";"
+def mudança (dados,sep_1:str, sep_2:str):
+    lt_dados = list(dados)     
+    flag = False
 
-with open ("original.txt", "r") as arquivo:
+    for i in range (len(lt_dados)): 
 
-    texto = arquivo.read ()
-
-    print ("Texto original\n", texto, "\n")
-
+        if not flag:
+            
+            if lt_dados[i] == '"':
+                flag = True        
+            
+            elif lt_dados[i] == sep_1:                    
+                lt_dados[i] = sep_2
+        
+        elif lt_dados[i] == '"' and flag:
+            flag = False   
     
+    #String
+    return ''.join(lt_dados)
 
-    texto = texto.replace (search_text, replace_text)
 
-with open("aaaaaa.txt", 'w') as arquivo:
-  
-    arquivo.write (texto)
-    print("Texto alterado\n", texto)
+file = open('exemplo.txt','r')   
+dados = file.read()       
 
+print(dados)
+
+#String
+novo = mudança (dados,",",";")
+print(novo)
